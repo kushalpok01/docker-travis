@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
@@ -7,9 +8,14 @@ test('renders learn react link', () => {
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
+
 it('renders the App component without crashing', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  root.render(<App />);
-  root.unmount();
+  act(() => {
+    root.render(<App />);
+  });
+  act(() => {
+    root.unmount();
+  });
 });
