@@ -10,16 +10,16 @@ script:
   - docker run -e CI=true kushalpok01/docker-react npm run test -- --coverage
 
 before_deploy:
-  - sudo apt-get update && sudo apt-get install -y zip
+  - sudo apt-get update -qq && sudo apt-get install -y zip
   - zip -r deploy.zip . -x "docker-compose.yml" "Dockerfile.dev" "node_modules/*" ".git/*"
 
 deploy:
   provider: elasticbeanstalk
   region: "eu-north-1"
-  app: "docker-react"
-  env: "Docker-react-env"
+  app: "docker-r"
+  env: "Docker-r-env"
   bucket_name: "elasticbeanstalk-eu-north-1-795176248030"
-  bucket_path: "docker-react"
+  bucket_path: "docker-r"
   zip_file: deploy.zip
   skip_cleanup: true
   on:
